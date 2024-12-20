@@ -4,10 +4,12 @@ import {core} from "@tauri-apps/api";
 import {open} from '@tauri-apps/plugin-shell';
 
 const defaultOptions = {
-    minWidth: 900,
-    minHeight: 507,
-    width: 1280,
-    height: 720,
+    // minWidth: 900,
+    // minHeight: 507,
+    // width: 1280,
+    // height: 720,
+    width: 128,
+    height: 72,
     center: true,
     focus: true,
     visible: true,

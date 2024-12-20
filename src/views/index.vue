@@ -35,6 +35,16 @@ const settingStore = useSettingStore();
 const showList = computed(() => m3uStore.m3uList.filter(x => settingStore.favoriteList.some(y => y === x.labelId)))
 
 
+import {AudioRecorder} from '../utils/audioRecorderClass.js';
+
+async function recorder() {
+  const recorder = new AudioRecorder();
+// // 开始录音
+  await recorder.connect();
+  await recorder.startRecording();
+}
+
+
 const toSetting = () => {
   router.push("/setting")
 }
@@ -62,7 +72,8 @@ const indexReactive = reactive({
 })
 
 onMounted(() => {
-  indexReactive.init()
+  indexReactive.init();
+  recorder();
 })
 
 onUnmounted(() => {

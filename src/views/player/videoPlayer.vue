@@ -159,11 +159,36 @@ const hlsReactive = reactive({
     }
   },
 });
+const getVideoAudio = reactive({
+  get() {
+    const videoEl = document.querySelector('video');
+    const mediaStream = videoEl.captureStream();
+
+    // 输出完整的 mediaStream 信息
+    console.log(mediaStream);
+
+    // 获取所有音频轨道并检查
+    const audioTracks = mediaStream.getAudioTracks();
+    console.log(audioTracks);
+
+
+    const audioTrack = audioTracks[0];
+    console.log(audioTrack);
+    // 创建MediaRecorder来获取音频数据
+    const mediaRecorder = new MediaRecorder(new MediaStream([audioTrack]));
+    mediaRecorder.ondataavailable = (e) => {
+      console.log(e.data);
+    };
+    console.log(mediaRecorder);
+    mediaRecorder.start(100);
+  }
+})
 let props = defineProps(['modelValue']);
 
 onMounted(() => {
   hlsReactive.init();
   hlsReactive.loadURL(props.modelValue);
+  // getVideoAudio.get();
 })
 
 onUnmounted(() => {
